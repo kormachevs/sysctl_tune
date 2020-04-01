@@ -9,10 +9,19 @@
 
 #### Поправить hosts, заполнить своими данными
 
-    ansible-playbook play_ntpd.yaml
+    ansible-playbook sysctl_tune.yaml
 
 #### Плейбук кастомизирует параметры ядра, применяет их на лету и записывает в файл /etc/sysctl.conf для восстановления значений после перезагрузки OS.
 
+        net.ipv4.ip_forward=1
+        net.ipv4.ip_nonlocal_bind=1
+        vm.swappiness=5
+        fs.file-max=65536
+        vm.vfs_cache_pressure=1000
+        net.ipv6.conf.all.disable_ipv6=1
+        vm.overcommit_memory=2
+        vm.overcommit_ratio=50
+        
 Тестирование роли на OS: Ubuntu 16.04, Ubuntu 18.04
 
 
