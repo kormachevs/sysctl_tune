@@ -1,0 +1,21 @@
+---
+- name: Tune sysctl file
+  hosts: all
+  become: true
+  become_method: sudo
+
+  tasks:
+  - sysctl:
+      name: "{{ item.name }}"
+      value: "{{ item.value }}"
+      state: present
+      sysctl_set: yes
+    loop:
+      - { name: 'net.ipv4.ip_forward', value: 1}
+      - { name: 'net.ipv4.ip_nonlocal_bind', value: 1}
+      - { name: 'vm.swappiness', value: 5}
+      - { name: 'fs.file-max', value: 65536}
+      - { name: 'vm.vfs_cache_pressure', value: 1000}
+      - { name: 'net.ipv6.conf.all.disable_ipv6', value: 1}
+      - { name: 'vm.overcommit_memory', value: 2}
+      - { name: 'vm.overcommit_ratio', value: 50}
